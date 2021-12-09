@@ -1,0 +1,1 @@
+SELECT year, month, west FROM us_housing_units
