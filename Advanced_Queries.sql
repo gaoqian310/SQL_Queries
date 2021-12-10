@@ -41,15 +41,56 @@ SELECT incidnt_num,
        TRIM(both '()' FROM location)
   FROM tutorial.sf_crime_incidents_2014_01
   
-  # POSITION function, allows you to specify a substring, then returns a numberical value equal to a character number (counting from left) where that substring first appears in the target string.
+  # POSITION function, allows you to specify a substring, then returns a numberical value equal to a character number 
+  # (counting from left) where that substring first appears in the target string.
   
   SELECT incidnt_num,
        descript,
        POSITION('A' IN descript) AS a_position
   FROM tutorial.sf_crime_incidents_2014_01
   
+  # STRPOS funciton have the similar function with POSITION.
   
+  SELECT incidnt_num,
+       descript,
+       STRPOS(descript, 'A') AS a_position
+  FROM tutorial.sf_crime_incidents_2014_01
+ 
+  # SUBSTR function can create substrings start in the middle of a string. SUBSTR(*string*, *starting character position*, *# of characters*)
   
+  SELECT incidnt_num,
+       date,
+       SUBSTR(date, 4, 2) AS day
+  FROM tutorial.sf_crime_incidents_2014_01
   
+  # CONCAT combine strings from serveal columns together.
   
+  SELECT incidnt_num,
+       day_of_week,
+       LEFT(date, 10) AS cleaned_date,
+       CONCAT(day_of_week, ', ', LEFT(date, 10)) AS day_and_date
+  FROM tutorial.sf_crime_incidents_2014_01
   
+  # use || to perform CONCAT
+  
+  SELECT incidnt_num,
+       day_of_week,
+       LEFT(date, 10) AS cleaned_date,
+       day_of_week || ', ' || LEFT(date, 10) AS day_and_date
+  FROM tutorial.sf_crime_incidents_2014_01
+  
+  # UPPER and LOWER, Change upper case and lower case
+  
+  SELECT incidnt_num,
+       address,
+       UPPER(address) AS address_upper,
+       LOWER(address) AS address_lower
+  FROM tutorial.sf_crime_incidents_2014_01
+  
+  # COALESCE to replace null values
+  
+  SELECT incidnt_num,
+       descript,
+       COALESCE(descript, 'No Description')
+  FROM tutorial.sf_crime_incidents_cleandate
+ ORDER BY descript DESC
